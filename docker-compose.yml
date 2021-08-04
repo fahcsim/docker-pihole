@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "67:67/udp"
+      - "81:80/tcp"
+    environment:
+      TZ: 'America/Chicago'
+      WEBPASSWORD: "${pihole_admin_pass}"
+      PIHOLE_DNS_: "${upstream_dns}"
+      ## Conditional Forwarding options##
+      REV_SERVER: "true"
+      REV_SERVER_TARGET: "${rev_server_ip}"
+      REV_SERVER_CIDR: "${rev_server_cidr}"
+    volumes:
+      - './etc-pihole/:/etc/pihole/'
+      - './etc-dnsmasq.d/:/etc/dnsmasq.d/'
+    restart: unless-stopped
