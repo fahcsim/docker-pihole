@@ -4,4 +4,4 @@ To get started, create a .env file with the following content, make sure to repl
     upstream_dns=<10.0.0.1;10.0.0.2>
     rev_server_ip=<10.0.0.1>
     rev_server_cidr=<10.0.0.0/24>
-
+    TZ=<America/Chicago>
